@@ -4,4 +4,4 @@ echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-ser
 
 gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
 
-gcloud gcloud app deploy --project $GCLOUD_PROJECT
+gcloud app deploy --project $GCLOUD_PROJECT
