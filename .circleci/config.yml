@@ -73,7 +73,8 @@ jobs:
           - v1-dependencies-
       - restore_cache:
           keys:
-          - next-build-{{ .Revision }}        
+          - next-build-{{ .Revision }}
+      - run: ls -als
       - run: ./scripts/deploy.sh
 
 
