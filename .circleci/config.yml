@@ -14,8 +14,6 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ~/repo
-
     steps:
       - checkout
 
@@ -36,7 +34,6 @@ jobs:
   test:
     docker:
       - image: circleci/node:7.10
-    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
@@ -48,7 +45,6 @@ jobs:
   build_next:
     docker:
       - image: circleci/node:7.10
-    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
@@ -64,7 +60,6 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
-    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
