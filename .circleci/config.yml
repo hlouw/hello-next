@@ -36,8 +36,6 @@ jobs:
   test:
     docker:
       - image: circleci/node:7.10
-    requires:
-      - build
     working_directory: ~/repo
     steps:
       - checkout
@@ -50,9 +48,6 @@ jobs:
   build_next:
     docker:
       - image: circleci/node:7.10
-    requires:
-      - build
-      - test
     working_directory: ~/repo
     steps:
       - checkout
@@ -62,13 +57,30 @@ jobs:
           - v1-dependencies-
       - run: yarn build
 
+  deploy:
+    docker:
+      - image: circleci/node:7.10
+    working_directory: ~/repo
+    steps:
+      - run: echo 'Here be deployment'
+
 workflows:
   version: 2
   build_and_test:
     jobs:
       - build
-      - test
-      - build_next
-      
+      - test:
+          requires:
+            - build
+      - build_next:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+            - build_next
+          filters:
+              branches:
+                only: master
 
 
